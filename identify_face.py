@@ -1,5 +1,6 @@
 # It helps in identifying the faces
 import cv2, numpy, os
+
 haar_file = 'haarcascade_frontalface_default.xml'
 face_cap = cv2.CascadeClassifier(haar_file)
 datasets = 'datasets'  
@@ -7,6 +8,7 @@ video_cap = cv2.VideoCapture(0)
 size = 4
   
 def face_identify():
+    name = input("Enter your name").capitalize()
     print('Recognizing Face Please Be in sufficient Lights...')
     
     # Create a list of images and a list of corresponding names
@@ -47,11 +49,24 @@ def face_identify():
                 cv2.putText(cap_data, '% s - %.0f' % (names[prediction[0]], prediction[1]), (x-10, y-10), cv2.FONT_HERSHEY_PLAIN, 2, (255, 255, 255))
             else:
                 cv2.putText(cap_data, 'not recognized', (x-10, y-10), cv2.FONT_HERSHEY_PLAIN, 1, (255, 0, 0))
-    
+
+            if names[prediction[0]] == name and prediction[1]>50.0:
+                print("Match")
+                message = "Your attendance has been recorded"
+            else:
+                print("Cant give access sorry")
+                message = "Your attendance can not be recorded."
+
         cv2.imshow('Recognizing face', cap_data)
+
         
         if cv2.waitKey(100) == ord("z"):
             break
+        break
+    return message
+    
+    
 
+mmm = face_identify()
 
-face_identify()
+print(mmm)
