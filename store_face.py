@@ -9,6 +9,7 @@ video_cap = cv2.VideoCapture(0)
 def face_store():
 # These are sub data sets of folder for faces 
     sub_data = input('Enter Your Name:').capitalize()
+    # regex for aphabets check
 
     path = os.path.join(datasets, sub_data)
     if not os.path.isdir(path):
